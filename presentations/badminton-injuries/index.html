@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102b3b">
+  <title>打羽球會造成哪些傷害？</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #143447;
+      --muted: #5c7280;
+      --paper: #f7f5ef;
+      --card: #fffefa;
+      --teal: #087e83;
+      --teal-light: #dcefed;
+      --coral: #d96d56;
+      --coral-light: #fae4dc;
+      --gold: #d6a64d;
+      --line: #d9e0dc;
+      --shadow: 0 28px 70px rgba(18, 43, 59, .18);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #dfe7e3; color: var(--ink); font-family: "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+    body { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    button { font: inherit; }
+    .deck { width: min(1180px, 100%); }
+    .stage { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 24px; background: var(--paper); box-shadow: var(--shadow); }
+    .slide { display: none; position: absolute; inset: 0; width: 100%; height: 100%; overflow: auto; padding: clamp(32px, 5.6vw, 76px) clamp(34px, 7vw, 96px) 76px; background: var(--paper); }
+    .slide.active { display: flex; flex-direction: column; animation: appear .28s ease-out; }
+    @keyframes appear { from { opacity: .65; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .slide::before { content: ""; position: absolute; width: 330px; height: 330px; border-radius: 50%; background: radial-gradient(circle, rgba(8,126,131,.09), transparent 70%); right: -120px; top: -150px; pointer-events: none; }
+    .eyebrow { text-transform: uppercase; letter-spacing: .16em; font-size: clamp(11px, 1vw, 14px); font-weight: 800; color: var(--teal); margin-bottom: 14px; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { font-size: clamp(42px, 6vw, 78px); line-height: 1.08; letter-spacing: -.04em; max-width: 780px; margin-bottom: 24px; }
+    h2 { font-size: clamp(30px, 4vw, 52px); line-height: 1.14; letter-spacing: -.03em; margin-bottom: 18px; max-width: 900px; }
+    h3 { font-size: clamp(17px, 1.65vw, 22px); margin-bottom: 9px; }
+    p, li { font-size: clamp(15px, 1.55vw, 20px); line-height: 1.55; }
+    .lede { color: var(--muted); font-size: clamp(18px, 2vw, 26px); max-width: 740px; line-height: 1.5; }
+    .content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .footer { position: absolute; left: clamp(34px, 7vw, 96px); right: clamp(34px, 7vw, 96px); bottom: 24px; display: flex; justify-content: space-between; gap: 20px; align-items: end; border-top: 1px solid var(--line); padding-top: 10px; color: var(--muted); font-size: clamp(10px, .9vw, 12px); line-height: 1.4; }
+    .cite { max-width: 86%; }
+    .counter { white-space: nowrap; font-weight: 800; color: var(--teal); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: stretch; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: clamp(18px, 2vw, 26px); box-shadow: 0 8px 25px rgba(20,52,71,.04); }
+    .card.teal { background: var(--teal-light); border-color: #c9e3df; }
+    .card.coral { background: var(--coral-light); border-color: #f0d1c5; }
+    .card.dark { background: var(--ink); color: #f5f5ee; border-color: var(--ink); }
+    .muted { color: var(--muted); }
+    .dark .muted { color: #c4d3d5; }
+    .big-number { font-size: clamp(38px, 5vw, 68px); font-weight: 850; letter-spacing: -.05em; line-height: 1; color: var(--teal); }
+    .coral .big-number { color: var(--coral); }
+    .dark .big-number { color: #f0c86e; }
+    .tag { display: inline-flex; align-items: center; border-radius: 99px; padding: 6px 11px; background: #e8eeea; color: var(--ink); font-size: 12px; font-weight: 800; margin: 0 6px 6px 0; }
+    .callout { border-left: 5px solid var(--gold); padding: 14px 18px; background: #fff6df; border-radius: 0 14px 14px 0; margin-top: 16px; }
+    .callout p { margin: 0; font-size: clamp(14px, 1.35vw, 18px); }
+    .chart { display: grid; gap: 13px; margin-top: 10px; }
+    .bar-row { display: grid; grid-template-columns: minmax(100px, 150px) 1fr 66px; gap: 12px; align-items: center; font-size: clamp(13px, 1.2vw, 16px); }
+    .bar-track { height: 14px; border-radius: 99px; background: #e4e9e5; overflow: hidden; }
+    .bar { height: 100%; width: var(--w); border-radius: inherit; background: var(--teal); }
+    .bar.coralbar { background: var(--coral); }
+    .bar.goldbar { background: var(--gold); }
+    .bar-value { font-weight: 850; font-variant-numeric: tabular-nums; }
+    .small { font-size: clamp(12px, 1.1vw, 15px); color: var(--muted); line-height: 1.45; }
+    .icon-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .step { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: start; margin: 12px 0; }
+    .step-num { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--teal); font-weight: 850; }
+    .step p { margin: 2px 0 0; }
+    .cover { background: var(--ink); color: #f8f6ed; }
+    .cover::before { width: 600px; height: 600px; top: auto; bottom: -280px; right: -130px; background: radial-gradient(circle, rgba(217,109,86,.43), rgba(8,126,131,.23) 42%, transparent 71%); }
+    .cover .eyebrow { color: #8fe0d2; }
+    .cover .lede { color: #d4e1de; }
+    .cover .footer { border-color: rgba(255,255,255,.24); color: #c4d3d5; }
+    .cover-art { position: absolute; right: 8%; bottom: 14%; width: 31%; max-width: 360px; opacity: .92; }
+    .cover .content { justify-content: center; }
+    .cover .lede { max-width: 600px; }
+    .refs { font-size: clamp(13px, 1.25vw, 16px); line-height: 1.48; }
+    .refs li { font-size: inherit; margin-bottom: 13px; }
+    a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .dark a, .cover a { color: #9ee6d8; }
+    .controls { display: flex; justify-content: center; align-items: center; gap: 12px; padding: 14px 4px 0; }
+    .controls button { border: 0; border-radius: 99px; background: var(--ink); color: white; min-width: 46px; height: 42px; padding: 0 17px; cursor: pointer; font-weight: 750; }
+    .controls button:hover { background: var(--teal); }
+    .controls button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    .controls .quiet { background: transparent; color: var(--ink); border: 1px solid #bbc9c4; }
+    .controls .quiet:hover { background: #e9efec; }
+    .progress { width: min(210px, 25vw); height: 5px; background: #c9d4cf; border-radius: 99px; overflow: hidden; }
+    .progress > span { display: block; width: 0; height: 100%; background: var(--coral); transition: width .2s ease; }
+    .toolbar-label { color: var(--muted); font-size: 13px; min-width: 78px; text-align: center; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 760px) {
+      body { padding: 8px; display: block; }
+      .stage { aspect-ratio: 16 / 9; min-height: 0; border-radius: 16px; }
+      .slide { min-height: 0; padding: 28px 22px 78px; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .cover-art { width: 34%; right: 8%; bottom: 11%; opacity: .55; }
+      .footer { left: 22px; right: 22px; bottom: 17px; }
+      .bar-row { grid-template-columns: 100px 1fr 54px; gap: 8px; }
+      .controls { gap: 7px; }
+      .controls button { height: 40px; min-width: 40px; padding: 0 12px; }
+      .progress { width: 20vw; }
+    }
+    @media print {
+      @page { size: 13.333in 7.5in; margin: 0; }
+      html, body { background: white; padding: 0; display: block; }
+      .deck { width: auto; }
+      .stage { width: 13.333in; height: 7.5in; overflow: visible; aspect-ratio: auto; border-radius: 0; box-shadow: none; }
+      .slide, .slide.active { display: flex !important; position: relative; width: 13.333in; height: 7.5in; page-break-after: always; overflow: hidden; }
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="打羽球會造成哪些傷害？簡報">
+    <div class="stage" id="stage" aria-live="off">
+      <section class="slide cover active" aria-labelledby="title-cover" data-kind="cover">
+        <div class="content">
+          <div class="eyebrow">羽球運動 × 身體負荷</div>
+          <h1 id="title-cover">打羽球<br>會造成哪些傷害？</h1>
+          <p class="lede">從腳步移動、揮拍動作與三篇文獻調查，認識研究中常見的傷害回報。</p>
+          <div class="icon-row"><span class="tag">一般民眾閱讀</span><span class="tag">12 頁內容</span><span class="tag">文獻整理</span></div>
+        </div>
+        <svg class="cover-art" viewBox="0 0 340 340" role="img" aria-label="羽球與球拍的抽象插圖">
+          <circle cx="170" cy="170" r="145" fill="none" stroke="#8fe0d2" stroke-width="2" opacity=".25"/>
+          <circle cx="170" cy="170" r="105" fill="none" stroke="#f0c86e" stroke-width="2" opacity=".45"/>
+          <ellipse cx="208" cy="159" rx="48" ry="70" transform="rotate(38 208 159)" fill="none" stroke="#f8f6ed" stroke-width="9"/>
+          <line x1="176" y1="214" x2="94" y2="300" stroke="#f8f6ed" stroke-width="12" stroke-linecap="round"/>
+          <line x1="177" y1="213" x2="244" y2="135" stroke="#f0c86e" stroke-width="2" opacity=".75"/>
+          <path d="M94 54 L119 117 L151 91 Z" fill="#d96d56"/>
+          <path d="M119 117 L151 91" stroke="#f8f6ed" stroke-width="3"/>
+          <circle cx="94" cy="54" r="8" fill="#f8f6ed"/>
+        </svg>
+        <div class="footer"><span class="cite">依本 Wiki 收錄之文獻整理；研究族群與年代不同，結果不代表每位球友的個人風險。</span><span class="counter">封面</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s1-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">01 / 動作特性</div>
+          <h2 id="s1-title">羽球為什麼讓身體承受負荷？</h2>
+          <p class="lede">比賽不只是揮拍，也包含快速移動與反覆改變方向。</p>
+          <div class="grid-3">
+            <article class="card teal"><div class="big-number">01</div><h3>急停、再啟動</h3><p class="small">跑向球、減速，再快速移往下一個位置。</p></article>
+            <article class="card coral"><div class="big-number">02</div><h3>跨步、跳躍、落地</h3><p class="small">下肢需要配合移動與落地，完成擊球。</p></article>
+            <article class="card"><div class="big-number">03</div><h3>反覆揮拍</h3><p class="small">肩、手臂與手腕反覆參與擊球動作。</p></article>
+          </div>
+          <div class="callout"><p>這些是文章描述的運動特性與可能負荷，不代表每個動作都一定會造成傷害。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[3] 郭名集（2007），PDF 第 2–4 頁</span><span class="counter">內容 1 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s2-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">02 / 先看樣本</div>
+          <h2 id="s2-title">這些數字來自哪些人？</h2>
+          <p class="lede">兩項調查談的是不同族群，不能把結果當成同一群人的比較。</p>
+          <div class="grid-2">
+            <article class="card dark">
+              <span class="tag">2003 年賽事</span><div class="big-number">278 人</div>
+              <h3>全中運優秀青少年選手</h3>
+              <p class="muted">國、高中羽球團體項目前八強；以問卷回顧運動傷害與訓練情形。</p>
+            </article>
+            <article class="card teal">
+              <span class="tag">2023 年調查</span><div class="big-number">286 人</div>
+              <h3>大專一般組選手</h3>
+              <p class="muted">參與大專一般組排名積分賽；有效問卷 286 份。</p>
+            </article>
+          </div>
+          <div class="callout"><p>年齡、競技程度、年代與問卷設計都不同；下頁數字要分開閱讀。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 3–4 頁；[2] 許仁豪（2023），PDF 第 4 頁</span><span class="counter">內容 2 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s3-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">03 / 傷害部位</div>
+          <h2 id="s3-title">不同族群，回報的部位排序不同</h2>
+          <div class="grid-2">
+            <article class="card">
+              <span class="tag">青少年競技樣本｜n=278</span>
+              <h3>踝部回報比例最高</h3>
+              <div class="chart">
+                <div class="bar-row"><span>踝關節</span><div class="bar-track"><div class="bar" style="--w:83.2%"></div></div><span class="bar-value">58.27%</span></div>
+                <div class="bar-row"><span>腰部肌肉</span><div class="bar-track"><div class="bar goldbar" style="--w:66.3%"></div></div><span class="bar-value">46.40%</span></div>
+                <div class="bar-row"><span>膝關節</span><div class="bar-track"><div class="bar goldbar" style="--w:63.2%"></div></div><span class="bar-value">44.24%</span></div>
+              </div>
+            </article>
+            <article class="card coral">
+              <span class="tag">大專一般組｜n=286</span>
+              <h3>肩部回報比例最高</h3>
+              <div class="chart">
+                <div class="bar-row"><span>肩關節</span><div class="bar-track"><div class="bar coralbar" style="--w:55.1%"></div></div><span class="bar-value">38.57%</span></div>
+                <div class="bar-row"><span>膝關節</span><div class="bar-track"><div class="bar coralbar" style="--w:51.7%"></div></div><span class="bar-value">36.18%</span></div>
+                <div class="bar-row"><span>手臂肌肉</span><div class="bar-track"><div class="bar coralbar" style="--w:47.8%"></div></div><span class="bar-value">33.49%</span></div>
+              </div>
+            </article>
+          </div>
+          <p class="small">比例依各研究原報告呈現；部位回報可能複選，不可加總成總受傷率，也不宜直接跨樣本排名。</p>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 5 頁；[2] 許仁豪（2023），PDF 第 9–11 頁</span><span class="counter">內容 3 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s4-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">04 / 踝與膝</div>
+          <h2 id="s4-title">移動、急停與落地，會增加下肢負荷</h2>
+          <p class="lede">羽球常見腳步需要快速改變位置，踝與膝會參與支撐、減速和再次移動。</p>
+          <div class="grid-3">
+            <article class="card"><span class="tag">跨步</span><h3>向前伸出</h3><p class="small">快速跨步後需要控制身體減速。</p><div class="step"><span class="step-num">↘</span><p>腳踝與膝部承接動作負荷</p></div></article>
+            <article class="card teal"><span class="tag">跳躍</span><h3>起跳與落地</h3><p class="small">落地時下肢需要配合穩定身體。</p><div class="step"><span class="step-num">↓</span><p>重複跳躍會形成反覆負荷</p></div></article>
+            <article class="card coral"><span class="tag">變向</span><h3>急停再轉向</h3><p class="small">快速移往下一個擊球位置。</p><div class="step"><span class="step-num">↗</span><p>移動控制與動作技巧都很重要</p></div></article>
+          </div>
+          <p class="small">圖示為動作概念，不代表每種動作必然造成特定傷害。</p>
+        </div>
+        <div class="footer"><span class="cite">來源：[3] 郭名集（2007），PDF 第 4–7 頁；[1] 楊繼美（2004），PDF 第 5–6 頁</span><span class="counter">內容 4 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s5-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">05 / 肩與手臂</div>
+          <h2 id="s5-title">反覆揮拍，也會讓上肢參與大量動作</h2>
+          <div class="grid-2">
+            <article class="card coral">
+              <span class="tag">2023 大專一般組問卷</span>
+              <div class="chart">
+                <div class="bar-row"><span>肩關節</span><div class="bar-track"><div class="bar coralbar" style="--w:100%"></div></div><span class="bar-value">38.57%</span></div>
+                <div class="bar-row"><span>手臂肌肉</span><div class="bar-track"><div class="bar coralbar" style="--w:87%"></div></div><span class="bar-value">33.49%</span></div>
+                <div class="bar-row"><span>腕關節</span><div class="bar-track"><div class="bar coralbar" style="--w:55%"></div></div><span class="bar-value">21.22%</span></div>
+              </div>
+            </article>
+            <article class="card dark">
+              <h3>看數字時要記得</h3>
+              <div class="step"><span class="step-num">1</span><p>以上是特定大專一般組受訪者回報的部位比例。</p></div>
+              <div class="step"><span class="step-num">2</span><p>文章討論反覆揮拍與肩、肘、腕等部位可能承受的負荷。</p></div>
+              <div class="step"><span class="step-num">3</span><p>比例不是個人預測，也不代表每位球友會有同樣情況。</p></div>
+            </article>
+          </div>
+        </div>
+        <div class="footer"><span class="cite">來源：[2] 許仁豪（2023），PDF 第 9–11 頁；[3] 郭名集（2007），PDF 第 5–7 頁</span><span class="counter">內容 5 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s6-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">06 / 傷害類型</div>
+          <h2 id="s6-title">調查中常見的回報：扭傷與拉傷</h2>
+          <div class="grid-2">
+            <article class="card teal">
+              <span class="tag">2023 大專一般組｜n=286</span>
+              <div class="grid-2">
+                <div><div class="big-number">65.23%</div><h3>扭傷</h3></div>
+                <div><div class="big-number">63.19%</div><h3>拉傷</h3></div>
+              </div>
+              <p class="small">為受訪者回報的傷害型態，非醫師診斷比例。</p>
+            </article>
+            <article class="card coral">
+              <span class="tag">2003 全中運青少年選手｜n=278</span>
+              <div class="big-number">66.55%</div><h3>回報肌肉拉傷</h3>
+              <p class="small">這是另一個年代與競技族群的調查，與左側數據不直接合併比較。</p>
+            </article>
+          </div>
+          <div class="callout"><p>兩篇問卷的題目與樣本不同；數字用來認識各自研究中的回報情形。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[2] 許仁豪（2023），PDF 第 9 頁；[1] 楊繼美（2004），PDF 第 6–7 頁</span><span class="counter">內容 6 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s7-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">07 / 問卷回報因素</div>
+          <h2 id="s7-title">受訪選手認為，哪些因素和受傷有關？</h2>
+          <div class="grid-2">
+            <article class="card">
+              <span class="tag">2023 大專一般組</span>
+              <div class="chart">
+                <div class="bar-row"><span>熱身不足</span><div class="bar-track"><div class="bar" style="--w:81.3%"></div></div><span class="bar-value">56.88%</span></div>
+                <div class="bar-row"><span>體能不足</span><div class="bar-track"><div class="bar goldbar" style="--w:61%"></div></div><span class="bar-value">42.71%</span></div>
+                <div class="bar-row"><span>姿勢不正確</span><div class="bar-track"><div class="bar goldbar" style="--w:43.5%"></div></div><span class="bar-value">30.43%</span></div>
+              </div>
+            </article>
+            <article class="card coral">
+              <span class="tag">2003 全中運青少年選手</span>
+              <div class="chart">
+                <div class="bar-row"><span>熱身不足</span><div class="bar-track"><div class="bar coralbar" style="--w:84.8%"></div></div><span class="bar-value">59.35%</span></div>
+                <div class="bar-row"><span>舊傷復發</span><div class="bar-track"><div class="bar coralbar" style="--w:83.8%"></div></div><span class="bar-value">58.63%</span></div>
+                <div class="bar-row"><span>肌力不足</span><div class="bar-track"><div class="bar goldbar" style="--w:55.5%"></div></div><span class="bar-value">38.85%</span></div>
+              </div>
+            </article>
+          </div>
+          <div class="callout"><p>這些是受訪者回報的看法，問卷不能單獨證明某項因素造成了傷害。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[2] 許仁豪（2023），PDF 第 8–9 頁；[1] 楊繼美（2004），PDF 第 7–8 頁</span><span class="counter">內容 7 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s8-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">08 / 疲勞與反覆負荷</div>
+          <h2 id="s8-title">疲勞和舊傷，是文獻提到的線索</h2>
+          <div class="grid-2">
+            <article class="card coral">
+              <span class="tag">青少年選手問卷</span>
+              <div class="big-number">58.63%</div>
+              <h3>受訪者回報「舊傷復發」</h3>
+              <p class="small">屬於 2003 年全中運優秀青少年選手的問卷結果。</p>
+            </article>
+            <article class="card dark">
+              <span class="tag">2007 年論述文章</span>
+              <h3>提到疲勞與休息不足</h3>
+              <p class="muted">作者討論疲勞、訓練負荷及反覆動作等可能與傷害相關的情境。</p>
+              <p class="small">這是文章整理的觀點，不是這篇文章新做的實驗。</p>
+            </article>
+          </div>
+          <div class="callout"><p>可把它們看成值得留意的研究線索，不是個人傷害的確定原因。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 7–8 頁；[3] 郭名集（2007），PDF 第 4、8–9 頁</span><span class="counter">內容 8 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s9-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">09 / 發生情境</div>
+          <h2 id="s9-title">傷害可能出現在不同運動情境</h2>
+          <p class="lede">2007 年文章整理了幾種可能的情境，作為理解羽球傷害的背景。</p>
+          <div class="grid-3">
+            <article class="card"><span class="big-number">A</span><h3>剛學動作時</h3><p class="small">文章提到技巧尚不熟練或動作不當的情況。</p></article>
+            <article class="card teal"><span class="big-number">B</span><h3>比賽前後</h3><p class="small">文章討論準備不足與賽後疲勞等情境。</p></article>
+            <article class="card coral"><span class="big-number">C</span><h3>比賽進行中</h3><p class="small">快速移動、勉強救球或持續高強度活動。</p></article>
+          </div>
+          <p class="small">這是論述文章所整理的情境，沒有提供每種情境的發生率。</p>
+        </div>
+        <div class="footer"><span class="cite">來源：[3] 郭名集（2007），PDF 第 4 頁</span><span class="counter">內容 9 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s10-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">10 / 正確解讀比例</div>
+          <h2 id="s10-title">「曾受傷」不等於每位球友都有相同風險</h2>
+          <div class="grid-2">
+            <article class="card dark">
+              <span class="tag">特定競技樣本｜n=278</span>
+              <div class="big-number">95.3%</div>
+              <h3>曾有羽球運動傷害經驗</h3>
+              <p class="muted">調查對象是 2003 年全中運羽球項目前八強的國高中選手。</p>
+            </article>
+            <article class="card">
+              <h3>這個數字不能直接套用到</h3>
+              <div class="step"><span class="step-num">×</span><p>所有年齡的休閒球友</p></div>
+              <div class="step"><span class="step-num">×</span><p>每週打球頻率不同的人</p></div>
+              <div class="step"><span class="step-num">×</span><p>不同年代或不同競技程度的選手</p></div>
+            </article>
+          </div>
+          <div class="callout"><p>這是特定樣本的自陳調查結果，不是一般民眾的受傷機率。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 3–5 頁</span><span class="counter">內容 10 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s11-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">11 / 研究限制</div>
+          <h2 id="s11-title">讀懂限制，才不會誤用數字</h2>
+          <div class="grid-3">
+            <article class="card teal"><div class="big-number">01</div><h3>樣本有限</h3><p class="small">問卷來自特定賽事、年齡與競技程度。</p></article>
+            <article class="card coral"><div class="big-number">02</div><h3>自我回報</h3><p class="small">受訪者回想的傷害與原因，不等同醫療診斷或因果驗證。</p></article>
+            <article class="card"><div class="big-number">03</div><h3>原文有數字差異</h3><p class="small">2023 研究摘要對未癒傷害寫「超過六成」，正文與結論為 51.12%。</p></article>
+          </div>
+          <div class="callout"><p>因此本簡報不把未癒傷害比例當作主要結論；其餘比例也須連同研究對象閱讀。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 3–5 頁；[2] 許仁豪（2023），PDF 第 1、10–12 頁</span><span class="counter">內容 11 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="s12-title" data-kind="content">
+        <div class="content">
+          <div class="eyebrow">12 / 帶走三個觀念</div>
+          <h2 id="s12-title">從文獻能看見什麼？</h2>
+          <div class="grid-3">
+            <article class="card dark"><div class="big-number">01</div><h3>羽球動作多變</h3><p class="muted">腳步移動、急停、跳躍與反覆揮拍都會讓不同部位參與。</p></article>
+            <article class="card teal"><div class="big-number">02</div><h3>部位排序看族群</h3><p class="small">青少年與大專樣本回報不同，不能直接合成一個「最容易受傷部位」。</p></article>
+            <article class="card coral"><div class="big-number">03</div><h3>數字要看來源</h3><p class="small">研究設計、年代與問卷回報方式，會影響可以怎麼解讀結果。</p></article>
+          </div>
+          <div class="callout"><p>本簡報整理文獻，不做個人風險預測，也不提供傷後處置或復健建議。</p></div>
+        </div>
+        <div class="footer"><span class="cite">來源：[1] 楊繼美（2004），PDF 第 5 頁；[2] 許仁豪（2023），PDF 第 9–11 頁；[3] 郭名集（2007），PDF 第 2–7 頁</span><span class="counter">內容 12 / 12</span></div>
+      </section>
+
+      <section class="slide" aria-labelledby="refs-title" data-kind="references">
+        <div class="content">
+          <div class="eyebrow">參考資料</div>
+          <h2 id="refs-title">本簡報使用的 Wiki 文獻</h2>
+          <ol class="refs">
+            <li><strong>[1] 楊繼美（2004）。</strong>我國優秀青少年羽球選手運動傷害之調查研究。《教練科學》，（4），71–83。<a href="https://doi.org/10.6194/SCS.2004.04.06">DOI</a> · <a href="../../sources/raw/我國優秀青少年羽球選手運動傷害之調查研究.pdf">開啟 PDF</a></li>
+            <li><strong>[2] 許仁豪（2023）。</strong>2023 大專羽球選手運動傷害與處置之調查研究。《臺灣羽球運動學刊》，3（1），35–49。PDF 未列 DOI。<a href="../../sources/raw/2023大專羽球選手運動傷害與處置之調查研究.pdf">開啟 PDF</a></li>
+            <li><strong>[3] 郭名集（2007）。</strong>認識與預防羽球運動傷害。《輔仁大學體育學刊》，（6），334–343。<a href="https://doi.org/10.29697/JPE.200705.0027">DOI</a> · <a href="../../sources/raw/認識與預防羽球運動傷害.pdf">開啟 PDF</a></li>
+          </ol>
+          <div class="callout"><p>簡報引用頁碼均指專案內原始 PDF 的頁次。數據與主張應連同研究對象、方法及限制閱讀。</p></div>
+        </div>
+        <div class="footer"><span class="cite">資料來源限於本專案 Wiki 收錄之文獻</span><span class="counter">參考資料</span></div>
+      </section>
+    </div>
+    <nav class="controls" aria-label="簡報控制">
+      <button id="prev" class="quiet" type="button" aria-label="上一頁">←</button>
+      <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+      <span class="toolbar-label" id="page-label" aria-live="polite">封面</span>
+      <button id="next" type="button" aria-label="下一頁">下一頁 →</button>
+      <button id="full" class="quiet" type="button" aria-label="切換全螢幕">全螢幕</button>
+    </nav>
+    <p class="sr-only" id="help">可使用方向鍵、Page Up、Page Down、Home、End 或空白鍵切換頁面。</p>
+  </main>
+  <script>
+    (() => {
+      const slides = [...document.querySelectorAll('.slide')];
+      const prev = document.getElementById('prev');
+      const next = document.getElementById('next');
+      const label = document.getElementById('page-label');
+      const progress = document.getElementById('progress');
+      let current = 0;
+      const contentSlides = slides.filter(slide => slide.dataset.kind === 'content');
+      function show(index) {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, i) => {
+          const active = i === current;
+          slide.classList.toggle('active', active);
+          slide.setAttribute('aria-hidden', String(!active));
+        });
+        const active = slides[current];
+        if (active.dataset.kind === 'cover') label.textContent = '封面';
+        else if (active.dataset.kind === 'references') label.textContent = '參考資料';
+        else label.textContent = `內容 ${contentSlides.indexOf(active) + 1} / ${contentSlides.length}`;
+        progress.style.width = `${((current + 1) / slides.length) * 100}%`;
+        prev.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+      }
+      prev.addEventListener('click', () => show(current - 1));
+      next.addEventListener('click', () => show(current + 1));
+      document.getElementById('full').addEventListener('click', async () => {
+        if (!document.fullscreenElement) await document.getElementById('stage').requestFullscreen?.();
+        else await document.exitFullscreen?.();
+      });
+      document.addEventListener('keydown', event => {
+        if (['ArrowRight', 'PageDown', ' '].includes(event.key)) { event.preventDefault(); show(current + 1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); show(current - 1); }
+        if (event.key === 'Home') show(0);
+        if (event.key === 'End') show(slides.length - 1);
+      });
+      let touchStart = null;
+      document.getElementById('stage').addEventListener('touchstart', event => { touchStart = event.changedTouches[0].clientX; }, {passive: true});
+      document.getElementById('stage').addEventListener('touchend', event => {
+        if (touchStart === null) return;
+        const delta = event.changedTouches[0].clientX - touchStart;
+        if (Math.abs(delta) > 60) show(current + (delta < 0 ? 1 : -1));
+        touchStart = null;
+      }, {passive: true});
+      show(0);
+    })();
+  </script>
+</body>
+</html>
